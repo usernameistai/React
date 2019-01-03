@@ -1,12 +1,12 @@
-const express = require('express');
-const router = express.Router();
+const express  = require('express');
+const router   = express.Router();
 const gravatar = require('gravatar');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const keys = require('../../config/keys');
+const bcrypt   = require('bcryptjs');
+const jwt      = require('jsonwebtoken');
+const keys     = require('../../config/keys');
 
 // Load User model
-const User = require('../../models/User');
+const User     = require('../../models/User');
 
 // @route   GET api/users/test
 // @desc    Tests user route

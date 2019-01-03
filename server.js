@@ -1,12 +1,12 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const express    = require('express');
+const mongoose   = require('mongoose');
 const bodyParser = require('body-parser');
 
-const users = require('./routes/api/users');
-const profile = require('./routes/api/profile');
-const posts = require('./routes/api/posts');
+const users      = require('./routes/api/users');
+const profile    = require('./routes/api/profile');
+const posts      = require('./routes/api/posts');
 
-const app = express();
+const app        = express();
 
 // Body parser middlewae
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router  = express.Router();
 
 // @route   GET api/prolie/test
 // @desc    Tests profile route
