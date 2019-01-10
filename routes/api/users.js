@@ -6,6 +6,10 @@ const jwt      = require('jsonwebtoken');
 const keys     = require('../../config/keys');
 const passport = require('passport');
 
+// Load Input Validation
+const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
+
 // Load User model
 const User     = require('../../models/User');
 
@@ -19,10 +23,17 @@ router.get('/test', (req, res) => res.json({ msg: 'Users works' }));
 // @desc    register user
 // @access  Public
 router.post('/register', (req, res) => {
-    User.findOne({ email: req.body.email })
-    .then(user => {
+    const { errors, isValid } = validateRegisterInput(req.body);
+
+    // check validation
+    if(!isValid) {
+        return res.status(400).json(errors);
+    }
+
+    User.findOne({ email: req.body.email }).then(user => {
         if(user){
-            return res.status(400).json({email: 'Email already exists'});
+            errors.email = 'Email already exists';
+            return res.status(400).json(errors);
         } else {
             const avatar = gravatar.url(req.body.email, {
                 s: '200', // size
@@ -55,6 +66,13 @@ router.post('/register', (req, res) => {
 // @desc    Login User / returning JWT token json web token
 // @access  Public
 router.post('/login', (req, res) => {
+    const { errors, isValid } = validateLoginInput(req.body);
+
+    // check validation
+    if(!isValid) {
+        return res.status(400).json(errors);
+    }
+
     const email = req.body.email;
     const password = req.body.password;
 
@@ -63,12 +81,12 @@ router.post('/login', (req, res) => {
         .then(user => {
             // Check for user
             if(!user){
-                return res.status(404).json({ email: 'User not found' });
+                errors.email = 'User not found';
+                return res.status(404).json(errors); // was { email: 'User not found' } but added the above errors.email
             }
 
             // Check Password           from db
-            bcrypt.compare(password, user.password)
-                .then(isMatch => {
+            bcrypt.compare(password, user.password).then(isMatch => {
                     if(isMatch){
                         // User matched
                         const payload = { id: user.id, name: user.name, avatar: user.avatar } // create jwt payload
@@ -85,7 +103,8 @@ router.post('/login', (req, res) => {
                                 });
                         });
                     } else {
-                        return res.status(400).json({ password: 'Password incorrect' });
+                        errors.password = 'Password incorrect';
+                        return res.status(400).json(errors); // was { password: 'Password incorrect' } added error.password from above
                     }
                 })
         });
