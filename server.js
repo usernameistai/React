@@ -19,7 +19,7 @@ const db = require("./config/keys").mongoURI;
 // connect to mongoDB
 mongoose
   .connect(db, {useNewUrlParser: true})
-  .then(() => console.log("MongoDB Connected")) // then is a promise returning something, if connect to db successfully
+  .then(() => console.log('MongoDB Connected')) // then is a promise returning something, if connect to db successfully
   .catch(err => console.log(err)); // needs a catch to go with it, called chaining?
 
 // Passport middleware
