@@ -136,3 +136,52 @@ class Navbar extends Component {
     );
   }
 }
+
+------------Error handling and display ----------------------------------------
+
+next we need to 
+cd client
+        and install axios (doing it in separate terminal)
+
+npm i axios
+
+HTP client use to communicate with our back end just to see if we can register a user through just the component for now
+
+
+Then
+      npm i classnames --save
+ Allows us to say if a certain something is true, then add this class to it
+
+
+ <input 
+    type="text" 
+    className={classnames('form-control form-control-lg', {
+      'is-invalid': errors.name // errors.name comes from validation, is-onvalid only happens if errors.name exists
+    })}  // was "form-control form-control-lg" 
+    placeholder="Name" 
+    name="name" 
+    value={this.state.name} 
+    onChange={this.onChange} />
+    { errors.name && (<div className="invalid-feedback">{errors.name}</div>) }
+    
+    className gets changed
+    bit at end gives the red boxes around wrongly filled in form items
+
+  <form noValidate onSubmit={this.onSubmit}> 
+
+  the noValidate stops the HTML5 giving its associated errors
+
+
+
+  -------------------- Redux and Authentication ------------------------
+  Why we need Redux
+  Application level state
+
+  Involved in passing data from forms and between components.
+
+  Next/////......
+    Install npm i redux react-redux redux-thunk --save (still unsure about save)
+
+import { Provider } from 'react-redux'; at top of app.js client side
+
+There is a lot on reducers, a lot a lot

@@ -19,7 +19,7 @@ const User     = require('../../models/User');
 router.get('/test', (req, res) => res.json({ msg: 'Users works' }));
 // res.json like res.send, serves json auto serves status 200 = okay
 
-// @route   GET api/users/register
+// @route   POST api/users/register
 // @desc    register user
 // @access  Public
 router.post('/register', (req, res) => {
@@ -62,7 +62,7 @@ router.post('/register', (req, res) => {
     })
 });
 
-// @route   GET api/users/login
+// @route   POST api/users/login
 // @desc    Login User / returning JWT token json web token
 // @access  Public
 router.post('/login', (req, res) => {
