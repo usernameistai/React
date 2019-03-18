@@ -185,3 +185,11 @@ Then
 import { Provider } from 'react-redux'; at top of app.js client side
 
 There is a lot on reducers, a lot a lot
+
+
+Terniary operators
+someState ? console.log(err) : res.render
+    if (someState) (console.log(err)) else (res.render)
+------------Register was hard---
+
+-------Login-(saving stuff in local storage, token generated when logging in)---------
