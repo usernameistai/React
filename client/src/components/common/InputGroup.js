@@ -19,7 +19,7 @@ const InputGroup = ({
                     <i className={icon} />
                 </span>
             </div>
-            <textareainput 
+            <input 
                 type={type} // whatever type property is passed in insetad of "email"
                 className={classnames('form-control form-control-lg', {
                     'is-invalid': error // errors.email
