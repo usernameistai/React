@@ -7,7 +7,7 @@ import { clearCurrentProfile } from '../../actions/profileActions';
 
 class Navbar extends Component {
   onLogoutClick(e){
-    e.preventdefault();
+    e.preventDefault();
     this.props.clearCurrentProfile();
     this.props.logoutUser();
   }
@@ -67,7 +67,6 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
-  clearCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 
