@@ -62,19 +62,19 @@ router.post('/', passport.authenticate('jwt', { session: false}), (req, res) => 
 // @desc    Delete post
 // @access  Private
 router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Profile.findOne({ user: req.user.id})
+    Profile.findOne({ user: req.user.id })
         .then(profile => {
             Post.findById(req.params.id)
                 .then(post => {
                     // check for post owner
-                    if(post.user.toString() !== req.user.id){
+                    if (post.user.toString() !== req.user.id){
                         return res.status(401).json({  notauthorized: 'User not authorized' });
                     }
                     // Delete
                     post.remove().then(() => res.json({ success: true}));
                 })
                 .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
-        })
+        });
 });
 
 // @route   POST api/posts/like/:id
@@ -94,7 +94,7 @@ router.post('/like/:id', passport.authenticate('jwt', { session: false }), (req,
                     post.save().then(post => res.json(post));
                 })
                 .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
-        })
+        });
 });
 
 // @route   POST api/posts/unlike/:id
@@ -122,7 +122,7 @@ router.post('/unlike/:id', passport.authenticate('jwt', { session: false }), (re
                     post.save().then(post => res.json(post));
                 })
                 .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
-        })
+        });
 });
 
 // @route   POST api/posts/comment/:id
@@ -144,7 +144,7 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false }), (r
                 name: req.body.name,
                 avatar: req.body.avatar,
                 user: req.user.id
-            }
+            };
         // Add to comments array
         post.comments.unshift(newComment);
         // Save
